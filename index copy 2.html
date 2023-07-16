@@ -33,58 +33,62 @@
     <input type="button" value="Name Font" onclick="changeFont()">
     <input type="button" value="Name Background" onclick="changeBackColor()">
     <input type="button" value="Chameleon" onclick="changeChameleon()">
-    <h1 id="heading2"><a href="index.html" id="heading" style="color: rgb(255, 255, 255);">JAEHUN KIM</a></h1>
-
-    <ul>
-        <li><a href="1.html">test1</a></li>
-        <li><a href="2.html">test2</a></li>
-        <li><a href="3.html">test3</a></li>
-    </ul>
+    <h1 id="heading2"><a href="index.html" id="heading" style="color: rgb(255, 255, 255);">JAEHUN KIM</a>
+    </h1>
+    
+<ul>
+    <li><a href="1.html">test1</a></li>
+    <li><a href="2.html">test2</a></li>
+    <li><a href="3.html">test3</a></li>
 
     <script>
         var colors = ["red", "blue", "green", "yellow", "orange", "purple"];
         var fonts = ["Arial", "Verdana", "Helvetica", "Courier", "Georgia", "Times New Roman"];
-
-        function getRandomValue(array) {
-            return array[Math.floor(Math.random() * array.length)];
-        }
-
+        
         function changeColor() {
             var heading = document.getElementById("heading");
-            heading.style.color = getRandomValue(colors);
+            var randomColor = colors[Math.floor(Math.random() * colors.length)];
+            heading.style.color = randomColor;
             hidetext();
-        }
-
+        } 
         function changeFont() {
             var heading = document.getElementById("heading");
-            heading.style.fontFamily = getRandomValue(fonts);
-            hidetext();
+            var randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+            heading.style.fontFamily = randomFont;
+        
         }
-
         function changeBackColor() {
             var heading2 = document.getElementById("heading2");
-            heading2.style.backgroundColor = getRandomValue(colors);
+            var randomBackColor = colors[Math.floor(Math.random() * colors.length)];
+            heading2.style.backgroundColor = randomBackColor;
             hidetext();
+        
         }
-
         function changeChameleon() {
             changeBackColor();
             changeColor();
             changeFont();
             hidetext();
         }
-
         function hidetext() {
             var heading = document.getElementById("heading");
-            var colorValue1 = getComputedStyle(heading).color.toLowerCase();
+            var colorValue1 = heading.style.getPropertyValue("color");
             var heading2 = document.getElementById("heading2");
-            var colorValue2 = getComputedStyle(heading2).backgroundColor.toLowerCase();
+            var colorValue2 = heading2.style.getPropertyValue("background-color");
+            var i = 0;
             var alist = document.querySelectorAll("a");
-
-            for (var i = 1; i < alist.length; i++) {
-                alist[i].style.color = (colorValue1 === colorValue2) ? colorValue1 : 'black';
-            }
+                    while (colorValue1 === colorValue2) {
+                    alist[i+1].style.color = colorValue1;
+                    i = i + 1;
+                 }
+                    while (colorValue1 !== colorValue2) {
+                    alist[i+1].style.color = 'black';
+                    i = i + 1;
+                 }
         }
+
+        
     </script>
+</ul>
 </body>
 </html>
